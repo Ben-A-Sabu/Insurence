@@ -8,5 +8,7 @@ import com.example.insuranceService.entity.Insurer;
 
 @Repository
 public interface InsurancePlanRepository extends JpaRepository<InsurancePlan, Long>{
-
+	long countByInsurer(Insurer insurer);
+	long countByInsurerAndActiveTrue(Insurer insurer);
+	long countByInsurerAndActiveFalse(Insurer insurer);
 }

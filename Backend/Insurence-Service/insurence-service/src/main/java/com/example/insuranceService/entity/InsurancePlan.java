@@ -4,6 +4,7 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 
 @Entity
@@ -23,16 +24,14 @@ public class InsurancePlan {
 	private double premium;
 	private int duration;
 	private boolean active=true;
-	
 	public boolean isActive() {
 		return active;
 	}
-
 	public void setActive(boolean active) {
 		this.active = active;
 	}
-
 	@ManyToOne
+	
 	private Insurer insurer;
 
 	public long getPlanId() {
