@@ -1,0 +1,45 @@
+<button (click)="goBack()">Back</button>
+<form (ngSubmit)="createPlan()" #planForm="ngForm">
+  <label>Plan Name</label><br />
+  <input type="text"
+         name="planName"
+         [(ngModel)]="plans.planName"
+         required />
+  <br /><br />
+  <label>Premium</label><br />
+  <input type="number"
+         name="premium"
+         [(ngModel)]="plans.premium"
+         required />
+  <br /><br />
+  <label>Duration</label><br />
+  <input type="text"
+         name="duration"
+         [(ngModel)]="plans.duration"
+         required />
+  <br /><br />
+  <button type="submit" [disabled]="!planForm.valid">
+    Create Plan
+  </button>
+</form>
+<h2>plans</h2>
+<table border="1" width="100%">
+  <tr>
+  <th>Name</th>
+  <th>Premium</th>
+  <th>Duration</th>
+  <th>staus</th>
+  <th>Action</th>
+</tr>
+<tr *ngFor="let p of plan">
+  <td>{{p.planName}}</td>
+  <td>{{p.premium}}</td>
+  <td>{{p.duration}}</td>
+  <td>{{p.active ? 'ACTIVE' :'INACTIVE'}}</td>
+  <td>
+    <button *ngIf="!p.active" (click)="activate(p.planId)">Activate</button>
+    <button *ngIf="p.active" (click)="deactivate(p.planId)">Deactivate</button>
+</td>
+</tr>
+</table>
+

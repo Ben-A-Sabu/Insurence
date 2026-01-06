@@ -1,0 +1,102 @@
+/* Page spacing */
+:host {
+  display: block;
+  padding: 20px;
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+/* Back button (first button on page) */
+button:first-child {
+  background-color: #6c757d;
+  color: white;
+  padding: 8px 14px;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  margin-bottom: 20px;
+}
+
+button:first-child:hover {
+  background-color: #5a6268;
+}
+
+/* Form styling */
+form {
+  background-color: #f8f9fa;
+  padding: 20px;
+  border-radius: 8px;
+  margin-bottom: 30px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+label {
+  font-weight: bold;
+}
+
+/* Inputs */
+input[type="text"],
+input[type="number"] {
+  width: 100%;
+  padding: 8px;
+  margin-top: 5px;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+}
+
+/* Create Plan button (inside form) */
+form button {
+  background-color: #28a745;
+  color: white;
+  padding: 10px 18px;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+form button:disabled {
+  background-color: #a5d6b0;
+  cursor: not-allowed;
+}
+
+/* Heading */
+h2 {
+  margin: 20px 0 10px;
+}
+
+/* Table */
+table {
+  width: 100%;
+  border-collapse: collapse;
+  background-color: white;
+}
+
+th {
+  background-color: #343a40;
+  color: white;
+  padding: 10px;
+}
+
+td {
+  padding: 10px;
+  text-align: center;
+}
+
+.activate-btn{
+  background-color: #28a745;
+
+}
+.deactivate-btn{
+  background-color: #dc3545;
+  color: white;
+}
+.activate-btn,
+.deactivate-btn{
+  padding: 6px 12px;
+  border-radius: 5px;
+  border: none;
+  cursor: pointer;
+}
+.activate-btn:hover,
+.deactivate-btn:hover{
+  opacity: 0.9;
+}

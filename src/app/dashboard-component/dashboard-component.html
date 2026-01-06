@@ -1,0 +1,42 @@
+<div class="dashboard-container">
+
+  <button class="logout-btn" (click)="logout()">Logout</button>
+
+  <h2 class="dashboard-title">Dashboard</h2>
+
+  <div class="cards">
+    <div class="card">
+      <h3>Total Plans</h3>
+      <p>{{ data?.totalPlans }}</p>
+    </div>
+
+    <div class="card">
+      <h3>Active Plans</h3>
+      <p>{{ data?.activePlans }}</p>
+    </div>
+
+    <div class="card">
+      <h3>Inactive Plans</h3>
+      <p>{{ data?.inactivePlans }}</p>
+    </div>
+
+    <div class="card">
+      <h3>Pending Claims</h3>
+      <p>{{ data?.pendingClaims }}</p>
+    </div>
+
+    <div class="card">
+      <h3>Approved Claims</h3>
+      <p>{{ data?.approvedClaims }}</p>
+    </div>
+
+    <div class="card">
+      <h3>Rejected Claims</h3>
+      <p>{{ data?.rejectedClaims }}</p>
+    </div>
+  </div>
+  <div class="links">
+    <a routerLink="/plan">Plans</a>
+    <a routerLink="/claims">Claims</a>
+  </div>
+</div>

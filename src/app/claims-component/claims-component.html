@@ -1,0 +1,58 @@
+<button (click)="goback()">Back</button>
+<h2>Pending Claims</h2>
+<div><p *ngIf="pendingClaims.length===0">No pending claims</p></div>
+<div *ngIf="pendingClaims.length>0">
+<table border="1">
+  <tr>
+    <th>ID</th>
+    <th>Amount</th>
+    <th>Status</th>
+    <th>Action</th>
+  </tr>
+  <tr *ngFor="let c of pendingClaims">
+    <td>{{ c.claimId }}</td>
+    <td>{{ c.claimAmount }}</td>
+    <td>{{ c.status }}</td>
+    <td>
+      <button (click)="approve(c.id)">Approve</button>
+      <button (click)="reject(c.id)">Reject</button>
+    </td>
+  </tr>
+</table>
+</div>
+<hr>
+
+<h2>Approved Claims</h2>
+<div><p *ngIf="approvedClaims.length===0">No pending claims</p></div>
+<div *ngIf="approvedClaims.length>0">
+<table border="1">
+  <tr>
+    <th>ID</th>
+    <th>Amount</th>
+    <th>Status</th>
+  </tr>
+  <tr *ngFor="let c of approvedClaims">
+    <td>{{ c.claimId }}</td>
+    <td>{{ c.claimAmount }}</td>
+    <td>{{ c.status }}</td>
+  </tr>
+</table>
+</div>
+<hr>
+
+<h2>Rejected Claims</h2>
+<div><p *ngIf="rejectedClaims.length===0">No pending claims</p></div>
+<div *ngIf="rejectedClaims.length>0">
+<table border="1">
+  <tr>
+    <th>ID</th>
+    <th>Amount</th>
+    <th>Status</th>
+  </tr>
+  <tr *ngFor="let c of rejectedClaims">
+    <td>{{ c.claimId }}</td>
+    <td>{{ c.claimAmount }}</td>
+    <td>{{ c.status }}</td>
+  </tr>
+</table>
+</div>

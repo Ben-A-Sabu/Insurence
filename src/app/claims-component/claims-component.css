@@ -1,0 +1,93 @@
+/* Page layout */
+h2 {
+  margin-top: 25px;
+  margin-bottom: 10px;
+  color: #2c3e50;
+}
+
+hr {
+  margin: 30px 0;
+  border: none;
+  border-top: 1px solid #ddd;
+}
+
+/* Back button */
+button:first-of-type {
+  background-color: #3498db;
+  color: #fff;
+  border: none;
+  padding: 8px 14px;
+  border-radius: 6px;
+  cursor: pointer;
+  margin-bottom: 15px;
+}
+
+button:first-of-type:hover {
+  background-color: #2980b9;
+}
+
+/* Table styling */
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 10px;
+}
+
+th {
+  background-color: #2c3e50;
+  color: #fff;
+  padding: 10px;
+  text-align: left;
+}
+
+td {
+  padding: 10px;
+  border-bottom: 1px solid #ddd;
+}
+
+/* Status colors */
+td:nth-child(3) {
+  font-weight: 600;
+}
+
+td:nth-child(3):contains("PENDING") {
+  color: #f39c12;
+}
+
+td:nth-child(3):contains("APPROVED") {
+  color: #27ae60;
+}
+
+td:nth-child(3):contains("REJECTED") {
+  color: #e74c3c;
+}
+
+/* Action buttons */
+td button {
+  padding: 6px 12px;
+  border-radius: 6px;
+  border: none;
+  cursor: pointer;
+  color: #fff;
+  margin-right: 6px;
+}
+
+/* Approve */
+td button:first-child {
+  background-color: #27ae60;
+}
+
+/* Reject */
+td button:last-child {
+  background-color: #e74c3c;
+}
+
+td button:hover {
+  opacity: 0.9;
+}
+
+/* Empty message */
+p {
+  color: #7f8c8d;
+  font-style: italic;
+}
