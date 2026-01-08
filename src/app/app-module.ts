@@ -10,6 +10,7 @@ import { FormsModule } from '@angular/forms';
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { AuthInterceptor } from './auth.interceptor';
 import { ClaimsComponent } from './claims-component/claims-component';
+import { VehicleComponent } from './vehicle-component/vehicle-component';
 
 @NgModule({
   declarations: [
@@ -17,7 +18,8 @@ import { ClaimsComponent } from './claims-component/claims-component';
     LoginComponent,
     PlanComponent,
     DashboardComponent,
-    ClaimsComponent
+    ClaimsComponent,
+    VehicleComponent
   ],
   imports: [
     BrowserModule,

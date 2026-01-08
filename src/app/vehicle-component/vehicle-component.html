@@ -1,0 +1,85 @@
+<div class="vehicle-card">
+  <h2>Vehicle Details</h2>
+
+  <!-- MODE SELECT -->
+  <div class="mode-toggle">
+    <label>
+      <input
+        type="radio"
+        name="mode"
+        value="AUTO"
+        [(ngModel)]="entryMode" />
+      I have vehicle number
+    </label>
+
+    <label>
+      <input
+        type="radio"
+        name="mode"
+        value="MANUAL"
+        [(ngModel)]="entryMode" />
+      I don't have vehicle number
+    </label>
+  </div>
+
+  <!-- AUTO POPULATE MODE -->
+  @if (entryMode === 'AUTO') {
+    <input
+      type="text"
+      placeholder="Enter Vehicle Number (KL07AB1234)"
+      [(ngModel)]="vehicleNumber" />
+
+    <button (click)="fetchVehicle()">Fetch Details</button>
+  }
+
+  <!-- MANUAL MODE -->
+  @if (entryMode === 'MANUAL') {
+
+    <select [(ngModel)]="selectedRto">
+      <option value="" disabled>Select RTO</option>
+      @for (rto of rtos; track rto.id) {
+        <option [ngValue]="rto">
+          {{ rto.rtoCode }} - {{ rto.city }}
+        </option>
+      }
+    </select>
+
+    <select [(ngModel)]="selectedBrand" (change)="onBrandChange()">
+      <option value="" disabled>Select Brand</option>
+      @for (brand of brands; track brand.id) {
+        <option [ngValue]="brand">
+          {{ brand.name }}
+        </option>
+      }
+    </select>
+
+    <select [(ngModel)]="selectedModel" (change)="onModelChange()">
+      <option value="" disabled>Select Model</option>
+      @for (model of models; track model.id) {
+        <option [ngValue]="model">
+          {{ model.name }}
+        </option>
+      }
+    </select>
+
+    <select [(ngModel)]="selectedFuel" (change)="onFuelChange()">
+      <option value="" disabled>Select Fuel Type</option>
+      @for (fuel of fuelTypes; track fuel) {
+        <option [value]="fuel">
+          {{ fuel }}
+        </option>
+      }
+    </select>
+
+    <select [(ngModel)]="selectedVariant">
+      <option value="" disabled>Select Variant</option>
+      @for (variant of variants; track variant.id) {
+        <option [ngValue]="variant">
+          {{ variant.name }}
+        </option>
+      }
+    </select>
+  }
+
+  <button (click)="continue()">Continue</button>
+</div>

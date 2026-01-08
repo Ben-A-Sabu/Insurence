@@ -5,11 +5,14 @@ import { AuthGuard } from './auth.guard';
 import { LoginComponent } from './login-component/login-component';
 import { PlanComponent } from './plan-component/plan-component';
 import { ClaimsComponent } from './claims-component/claims-component';
+import { VehicleComponent } from './vehicle-component/vehicle-component';
 
-const routes: Routes = [{path:'login',component:LoginComponent},
+const routes: Routes = [
+  {path:'login',component:LoginComponent},
   {path:'dashboard',component:DashboardComponent,canActivate:[AuthGuard]},
   { path: 'plan', component: PlanComponent, canActivate: [AuthGuard] },
    { path: 'claims', component: ClaimsComponent, canActivate: [AuthGuard] },
+    { path: 'vehicle', component: VehicleComponent },
   { path: '', redirectTo: 'login' ,pathMatch:'full'}
 ];
 
