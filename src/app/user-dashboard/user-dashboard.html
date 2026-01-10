@@ -1,0 +1,116 @@
+<div class="dashboard-wrapper">
+  
+  <div class="hero">
+    <div class="hero-overlay">
+      <h1 class="quote">"Peace of mind is just a click away."</h1>
+      <button class="buy-btn" (click)="navigateToShop()">Buy Insurance</button>
+    </div>
+  </div>
+
+  <div class="dashboard-grid">
+    
+    <div class="plans-column">
+      <h2>My Purchased Plans</h2>
+      <div class="plans-list">
+        @for (plan of purchasedPlans; track plan.policyId) {
+          <div class="plan-card">
+            <div class="plan-info">
+              <span class="category-tag">{{ plan.category }}</span>
+              <h3>{{ plan.name }}</h3>
+              <p>Policy: {{ plan.policyId }}</p>
+            </div>
+            <div class="plan-footer">
+              <small>Expires: {{ plan.expiryDate }}</small>
+            </div>
+          </div>
+        } @empty {
+          <p>No plans purchased yet.</p>
+        }
+      </div>
+    </div>
+
+    <div class="profile-column">
+      <div class="profile-card">
+        <div class="profile-header">
+          <h3>User Profile</h3>
+          @if (!isEditing) {
+            <button type="button" class="btn-link" (click)="toggleEdit()">Edit</button>
+          }
+        </div>
+
+        <form [formGroup]="profileForm" (ngSubmit)="onSaveProfile()">
+          <div class="field-group">
+            <label>Username</label>
+            @if (isEditing) {
+              <input type="text" formControlName="username" class="input-edit">
+            } @else {
+              <p class="text-display">{{ profileForm.value.username }}</p>
+            }
+          </div>
+
+          <div class="field-group">
+            <label>Email Address</label>
+            @if (isEditing) {
+              <input type="email" formControlName="email" class="input-edit">
+            } @else {
+              <p class="text-display">{{ profileForm.value.email }}</p>
+            }
+          </div>
+
+          @if (isEditing) {
+            <div class="form-footer">
+              <button type="button" class="btn-cancel" (click)="cancelEdit()">Cancel</button>
+              <button type="submit" class="btn-save" [disabled]="profileForm.invalid">Save Changes</button>
+            </div>
+          }
+        </form>
+      </div>
+    </div>
+
+  </div>
+
+  <footer class="dashboard-footer">
+  <div class="footer-content">
+    
+    <div class="footer-section">
+      <h3 class="footer-logo">Secure<span>Insure</span></h3>
+      <p>Protecting your assets with smart, reliable, and transparent insurance solutions since 2010.</p>
+    </div>
+
+    <div class="footer-section">
+      <h4>Quick Links</h4>
+      <ul>
+        <li><a href="#">My Policies</a></li>
+        <li><a href="#">Claim Center</a></li>
+        <li><a href="#">Renewals</a></li>
+        <li><a href="#">Support</a></li>
+      </ul>
+    </div>
+
+    <div class="footer-section">
+      <h4>Contact Us</h4>
+      <p>Email: support@secureinsure.com</p>
+      <p>Phone: +91 1800-123-4567</p>
+      <p>Hours: Mon - Sat, 9am - 6pm</p>
+    </div>
+
+    <div class="footer-section">
+      <h4>Follow Us</h4>
+      <div class="social-icons">
+        <a href="#" class="social-icon">Fb</a>
+        <a href="#" class="social-icon">Tw</a>
+        <a href="#" class="social-icon">In</a>
+      </div>
+    </div>
+
+  </div>
+
+  <div class="footer-bottom">
+    <p>&copy; 2026 SecureInsure Pvt Ltd. All rights reserved.</p>
+    <div class="footer-legal">
+      <a href="#">Privacy Policy</a>
+      <a href="#">Terms & Conditions</a>
+    </div>
+  </div>
+</footer>
+</div>

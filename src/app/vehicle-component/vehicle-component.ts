@@ -8,9 +8,10 @@ import { ApiService } from '../api.service';
   styleUrl: './vehicle-component.css',
 })
 export class VehicleComponent implements OnInit {
-
   vehicleNumber = '';
   autoPopulated = false;
+  isLoading = false;
+  entryMode: 'AUTO' | 'MANUAL' = 'AUTO';
 
   rtos: any[] = [];
   brands: any[] = [];
@@ -18,64 +19,54 @@ export class VehicleComponent implements OnInit {
   fuelTypes: string[] = [];
   variants: any[] = [];
 
-  selectedRto: any;
-  selectedBrand: any;
-  selectedModel: any;
-  selectedFuel: string | undefined;
-  selectedVariant: any;
-entryMode: any;
+  selectedRto: any = null;
+  selectedBrand: any = null;
+  selectedModel: any = null;
+  selectedFuel: string | undefined = undefined;
+  selectedVariant: any = null;
 
   constructor(private api: ApiService) {}
 
   ngOnInit(): void {
-    //this.api.getRtos().subscribe(r => this.rtos = r);
-   // this.api.getBrands().subscribe(b => this.brands = b);
+    // Load initial data for Manual mode
+    // this.api.getRtos().subscribe(r => this.rtos = r);
+    // this.api.getBrands().subscribe(b => this.brands = b);
   }
 
   fetchVehicle() {
-    if (!this.vehicleNumber) {
-      alert('Enter vehicle number');
-      return;
+    if (!this.vehicleNumber) return;
+    
+    this.isLoading = true;
+    // Simulate API Call
+    setTimeout(() => {
+      // Logic to fetch from DB
+      // this.api.getVehicleByNumber(this.vehicleNumber).subscribe(...)
+      this.autoPopulated = true;
+      this.isLoading = false;
+      
+      // Mocking a result for demo
+      this.selectedBrand = { name: 'Maruti Suzuki' };
+      this.selectedModel = { name: 'Swift' };
+    }, 1500);
+  }
+
+  // Logic to check if we can proceed
+  isFormValid(): boolean {
+    if (this.entryMode === 'AUTO') {
+      return this.autoPopulated; // Only active if fetch was successful
+    } else {
+      // All manual fields must be truthy
+      return !!(this.selectedRto && this.selectedBrand && this.selectedModel && this.selectedFuel && this.selectedVariant);
     }
-
-    // this.api.getVehicleByNumber(this.vehicleNumber).subscribe({
-    //   next: res => {
-    //     this.autoPopulated = true;
-    //     this.selectedRto = res.rto;
-    //     this.selectedBrand = res.brand;
-    //     this.selectedModel = res.model;
-    //     this.selectedFuel = res.fuelType;
-    //     this.selectedVariant = res.variant;
-    //   },
-    //   error: () => {
-    //     alert('Vehicle not found. Please enter manually.');
-    //     this.autoPopulated = false;
-    //   }
-    // });
   }
 
-  onBrandChange() {
-   // this.api.getModelsByBrand(this.selectedBrand.id)
-      //.subscribe(m => this.models = m);
-  }
-
-  onModelChange() {
-   // this.api.getFuelTypes(this.selectedModel.id)
-     // .subscribe(f => this.fuelTypes = f);
-  }
-
-  onFuelChange() {
-    //this.api.getVariants(this.selectedModel.id, this.selectedFuel)
-      //.subscribe(v => this.variants = v);
-  }
+  onBrandChange() { /* API call for models */ }
+  onModelChange() { /* API call for fuels */ }
+  onFuelChange() {  /* API call for variants */ }
 
   continue() {
-    console.log('Vehicle Final Selection', {
-      rto: this.selectedRto,
-      brand: this.selectedBrand,
-      model: this.selectedModel,
-      fuel: this.selectedFuel,
-      variant: this.selectedVariant
-    });
+    if(this.isFormValid()) {
+      console.log('Proceeding with:', this.vehicleNumber || this.selectedVariant);
+    }
   }
 }

@@ -1,0 +1,61 @@
+<div class="plans-wrapper">
+  <div class="plan-heading">
+    <h1>Available Insurance Plans</h1>
+    <p>Compare and choose the best protection for your vehicle</p>
+  </div>
+
+  <div class="plans-grid">
+    @for (plan of plans; track plan.id) {
+      <div class="plan-card" [class.is-expanded]="expandedPlanId === plan.id">
+        
+        <div class="plan-header">
+          <div class="title-row">
+            <h3>{{ plan.name }}</h3>
+            @if (plan.id === 2) { <span class="recom-badge">Best Value</span> }
+          </div>
+          <p class="description">{{ plan.description }}</p>
+        </div>
+
+        <div class="plan-pricing">
+          <span class="price">₹{{ plan.totalPremium | number }}</span>
+          <span class="duration">/ year</span>
+        </div>
+
+        <div class="plan-actions">
+          <button class="btn-secondary" (click)="toggleDropdown(plan.id)">
+            {{ expandedPlanId === plan.id ? 'Close' : 'View Details' }}
+          </button>
+          <button class="btn-primary" (click)="buyPlan(plan)">Buy Now</button>
+        </div>
+
+        @if (expandedPlanId === plan.id) {
+          <div class="expand-content">
+            <div class="tab-header">
+              <button [class.active]="plan.activeTab === 'premium'" (click)="selectTab(plan, 'premium')">Pricing</button>
+              <button [class.active]="plan.activeTab === 'features'" (click)="selectTab(plan, 'features')">Features</button>
+            </div>
+
+            <div class="tab-pane">
+              @if (plan.activeTab === 'premium') {
+                <div class="details-list">
+                  <div class="detail-item"><span>Base Premium</span> <strong>₹{{ plan.premiumBreakdown.basePremium }}</strong></div>
+                  <div class="detail-item"><span>Tax (GST)</span> <strong>₹{{ plan.premiumBreakdown.tax }}</strong></div>
+                  <div class="detail-item"><span>Service Charges</span> <strong>₹{{ plan.premiumBreakdown.serviceCharge }}</strong></div>
+                  <div class="detail-item total"><span>Total Payable</span> <strong>₹{{ plan.totalPremium }}</strong></div>
+                </div>
+              }
+
+              @if (plan.activeTab === 'features') {
+                <ul class="feature-checklist">
+                  @for (feat of plan.features; track feat) {
+                    <li><span class="icon">✔</span> {{ feat }}</li>
+                  }
+                </ul>
+              }
+            </div>
+          </div>
+        }
+      </div>
+    }
+  </div>
+</div>

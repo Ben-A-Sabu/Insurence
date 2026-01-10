@@ -6,11 +6,15 @@ import { App } from './app';
 import { LoginComponent } from './login-component/login-component';
 import { PlanComponent } from './plan-component/plan-component';
 import { DashboardComponent } from './dashboard-component/dashboard-component';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { AuthInterceptor } from './auth.interceptor';
 import { ClaimsComponent } from './claims-component/claims-component';
 import { VehicleComponent } from './vehicle-component/vehicle-component';
+import { InsurancePlans } from './insurance-plans/insurance-plans';
+import { PlanSuccessComponent } from './plan-success-component/plan-success-component';
+import {  UserDashboardComponent } from './user-dashboard/user-dashboard';
+
 
 @NgModule({
   declarations: [
@@ -19,12 +23,16 @@ import { VehicleComponent } from './vehicle-component/vehicle-component';
     PlanComponent,
     DashboardComponent,
     ClaimsComponent,
-    VehicleComponent
+    VehicleComponent,
+    InsurancePlans,
+    PlanSuccessComponent,
+    UserDashboardComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
-    FormsModule
+    FormsModule,
+     ReactiveFormsModule 
   ],
   providers: [
     {

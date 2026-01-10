@@ -1,0 +1,199 @@
+.plans-wrapper {
+  max-width: 1000px;
+  margin: 50px auto;
+  padding: 0 20px;
+  font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+}
+
+.plan-heading {
+  text-align: center;
+  margin-bottom: 40px;
+}
+
+.plan-heading h1 {
+  color: #1a202c;
+  font-size: 28px;
+  margin-bottom: 8px;
+}
+
+.plan-heading p {
+  color: #718096;
+  font-size: 16px;
+}
+
+/* The Grid Fix */
+.plans-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  gap: 24px;
+  align-items: start;
+  /* PREVENTS ADJACENT CARDS FROM STRETCHING */
+}
+
+.plan-card {
+  background: #ffffff;
+  border: 1px solid #e2e8f0;
+  border-radius: 16px;
+  padding: 24px;
+  transition: all 0.3s ease;
+  height: auto;
+  /* Card grows naturally */
+}
+
+.plan-card:hover {
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.05);
+}
+
+.plan-card.is-expanded {
+  border-color: #3182ce;
+  box-shadow: 0 4px 12px rgba(49, 130, 206, 0.1);
+}
+
+/* Header & Badges */
+.title-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.recom-badge {
+  background: #ebf8ff;
+  color: #2b6cb0;
+  font-size: 11px;
+  font-weight: 700;
+  padding: 4px 10px;
+  border-radius: 20px;
+  text-transform: uppercase;
+}
+
+.description {
+  color: #718096;
+  font-size: 14px;
+  margin-top: 8px;
+}
+
+/* Pricing */
+.plan-pricing {
+  margin: 24px 0;
+}
+
+.price {
+  font-size: 32px;
+  font-weight: 800;
+  color: #1a202c;
+}
+
+.duration {
+  color: #a0aec0;
+  font-size: 14px;
+  margin-left: 4px;
+}
+
+/* Buttons */
+.plan-actions {
+  display: flex;
+  gap: 12px;
+}
+
+.btn-primary {
+  flex: 1.5;
+  background: #3182ce;
+  color: white;
+  border: none;
+  padding: 12px;
+  border-radius: 8px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.btn-secondary {
+  flex: 1;
+  background: #f7fafc;
+  color: #4a5568;
+  border: 1px solid #e2e8f0;
+  padding: 12px;
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+/* Expandable Content */
+.expand-content {
+  margin-top: 24px;
+  padding-top: 20px;
+  border-top: 1px solid #edf2f7;
+  animation: slideDown 0.3s ease-out;
+}
+
+@keyframes slideDown {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Internal Tabs */
+.tab-header {
+  display: flex;
+  background: #f1f5f9;
+  padding: 4px;
+  border-radius: 8px;
+  margin-bottom: 16px;
+}
+
+.tab-header button {
+  flex: 1;
+  border: none;
+  background: none;
+  padding: 8px;
+  font-size: 13px;
+  font-weight: 600;
+  color: #64748b;
+  cursor: pointer;
+  border-radius: 6px;
+}
+
+.tab-header button.active {
+  background: white;
+  color: #3182ce;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+/* Details */
+.detail-item {
+  display: flex;
+  justify-content: space-between;
+  font-size: 14px;
+  padding: 8px 0;
+  color: #4a5568;
+}
+
+.detail-item.total {
+  border-top: 1px dashed #cbd5e1;
+  margin-top: 8px;
+  padding-top: 12px;
+  color: #1a202c;
+}
+
+.feature-checklist {
+  list-style: none;
+  padding: 0;
+}
+
+.feature-checklist li {
+  font-size: 14px;
+  color: #4a5568;
+  margin-bottom: 10px;
+  display: flex;
+  align-items: center;
+}
+
+.icon {
+  color: #38a169;
+  margin-right: 10px;
+  font-weight: bold;
+}

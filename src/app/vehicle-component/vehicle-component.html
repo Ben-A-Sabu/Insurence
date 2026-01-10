@@ -1,85 +1,98 @@
-<div class="vehicle-card">
-  <h2>Vehicle Details</h2>
+<div class="vehicle-container">
+  <div class="vehicle-card">
+    <div class="header-section">
+      <h2>Vehicle Details</h2>
+      <p class="subtitle">Specify the vehicle you want to insure</p>
+    </div>
 
-  <!-- MODE SELECT -->
-  <div class="mode-toggle">
-    <label>
-      <input
-        type="radio"
-        name="mode"
-        value="AUTO"
-        [(ngModel)]="entryMode" />
-      I have vehicle number
-    </label>
+    <div class="mode-selector">
+      <button [class.active]="entryMode === 'AUTO'" (click)="entryMode = 'AUTO'">
+        By Vehicle Number
+      </button>
+      <button [class.active]="entryMode === 'MANUAL'" (click)="entryMode = 'MANUAL'">
+        Manual Entry
+      </button>
+    </div>
 
-    <label>
-      <input
-        type="radio"
-        name="mode"
-        value="MANUAL"
-        [(ngModel)]="entryMode" />
-      I don't have vehicle number
-    </label>
+    @if (entryMode === 'AUTO') {
+      <div class="input-action-group">
+        <input
+          type="text"
+          placeholder="e.g. KL07AB1234"
+          [(ngModel)]="vehicleNumber"
+          class="v-input"
+          (input)="autoPopulated = false" />
+        <button class="fetch-btn" [disabled]="!vehicleNumber || isLoading" (click)="fetchVehicle()">
+          @if (isLoading) { <span class="loader"></span> } @else { Fetch }
+        </button>
+      </div>
+
+      @if (autoPopulated) {
+        <div class="result-box">
+          <p><strong>Detected:</strong> {{selectedBrand?.name}} {{selectedModel?.name}}</p>
+          <span class="success-tag">Details Verified ✓</span>
+        </div>
+      }
+    }
+
+    @if (entryMode === 'MANUAL') {
+      <div class="manual-form">
+        <div class="select-wrapper">
+          <label>RTO Location</label>
+          <select [(ngModel)]="selectedRto">
+            <option [ngValue]="null" disabled>Select RTO</option>
+            @for (rto of rtos; track rto.id) {
+              <option [ngValue]="rto">{{ rto.rtoCode }} - {{ rto.city }}</option>
+            }
+          </select>
+        </div>
+
+        <div class="grid-inputs">
+          <div class="select-wrapper">
+            <label>Brand</label>
+            <select [(ngModel)]="selectedBrand" (change)="onBrandChange()">
+              <option [ngValue]="null" disabled>Select Brand</option>
+              @for (brand of brands; track brand.id) {
+                <option [ngValue]="brand">{{ brand.name }}</option>
+              }
+            </select>
+          </div>
+
+          <div class="select-wrapper">
+            <label>Model</label>
+            <select [(ngModel)]="selectedModel" (change)="onModelChange()">
+              <option [ngValue]="null" disabled>Select Model</option>
+              @for (model of models; track model.id) {
+                <option [ngValue]="model">{{ model.name }}</option>
+              }
+            </select>
+          </div>
+        </div>
+
+        <div class="select-wrapper">
+          <label>Fuel Type</label>
+          <select [(ngModel)]="selectedFuel" (change)="onFuelChange()">
+            <option [ngValue]="undefined" disabled>Select Fuel</option>
+            @for (fuel of fuelTypes; track fuel) {
+              <option [value]="fuel">{{ fuel }}</option>
+            }
+          </select>
+        </div>
+
+        <div class="select-wrapper">
+          <label>Variant</label>
+          <select [(ngModel)]="selectedVariant">
+            <option [ngValue]="null" disabled>Select Variant</option>
+            @for (variant of variants; track variant.id) {
+              <option [ngValue]="variant">{{ variant.name }}</option>
+            }
+          </select>
+        </div>
+      </div>
+    }
+
+    <button class="continue-btn" [disabled]="!isFormValid()" (click)="continue()">
+      Continue to Quotes
+    </button>
   </div>
-
-  <!-- AUTO POPULATE MODE -->
-  @if (entryMode === 'AUTO') {
-    <input
-      type="text"
-      placeholder="Enter Vehicle Number (KL07AB1234)"
-      [(ngModel)]="vehicleNumber" />
-
-    <button (click)="fetchVehicle()">Fetch Details</button>
-  }
-
-  <!-- MANUAL MODE -->
-  @if (entryMode === 'MANUAL') {
-
-    <select [(ngModel)]="selectedRto">
-      <option value="" disabled>Select RTO</option>
-      @for (rto of rtos; track rto.id) {
-        <option [ngValue]="rto">
-          {{ rto.rtoCode }} - {{ rto.city }}
-        </option>
-      }
-    </select>
-
-    <select [(ngModel)]="selectedBrand" (change)="onBrandChange()">
-      <option value="" disabled>Select Brand</option>
-      @for (brand of brands; track brand.id) {
-        <option [ngValue]="brand">
-          {{ brand.name }}
-        </option>
-      }
-    </select>
-
-    <select [(ngModel)]="selectedModel" (change)="onModelChange()">
-      <option value="" disabled>Select Model</option>
-      @for (model of models; track model.id) {
-        <option [ngValue]="model">
-          {{ model.name }}
-        </option>
-      }
-    </select>
-
-    <select [(ngModel)]="selectedFuel" (change)="onFuelChange()">
-      <option value="" disabled>Select Fuel Type</option>
-      @for (fuel of fuelTypes; track fuel) {
-        <option [value]="fuel">
-          {{ fuel }}
-        </option>
-      }
-    </select>
-
-    <select [(ngModel)]="selectedVariant">
-      <option value="" disabled>Select Variant</option>
-      @for (variant of variants; track variant.id) {
-        <option [ngValue]="variant">
-          {{ variant.name }}
-        </option>
-      }
-    </select>
-  }
-
-  <button (click)="continue()">Continue</button>
 </div>

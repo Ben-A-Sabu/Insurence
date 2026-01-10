@@ -1,136 +1,182 @@
-/* Container */
-:host {
+.vehicle-container {
   display: flex;
   justify-content: center;
+  align-items: center;
+  min-height: 80vh;
   padding: 20px;
-  box-sizing: border-box;
 }
 
-/* Card Layout */
 .vehicle-card {
   width: 100%;
-  max-width: 520px;
-  background: #ffffff;
-  border-radius: 12px;
-  padding: 24px;
-  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
+  max-width: 480px;
+  background: #fff;
+  padding: 32px;
+  border-radius: 20px;
+  box-shadow: 0 10px 40px rgba(0,0,0,0.08);
 }
 
-/* Heading */
-h2 {
-  text-align: center;
-  margin-bottom: 20px;
-  color: #1f2937;
-  font-size: 22px;
+.header-section { text-align: center; margin-bottom: 24px; }
+.header-section h2 { margin: 0; color: #111; font-size: 24px; }
+.subtitle { color: #666; font-size: 14px; margin-top: 4px; }
+
+/* Segmented Control */
+.mode-selector {
+  display: flex;
+  background: #f1f5f9;
+  padding: 4px;
+  border-radius: 12px;
+  margin-bottom: 24px;
+}
+
+.mode-selector button {
+  flex: 1;
+  background: transparent;
+  border: none;
+  padding: 10px;
+  border-radius: 10px;
+  font-size: 14px;
+  color: #64748b;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.mode-selector button.active {
+  background: #fff;
+  color: #2563eb;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
   font-weight: 600;
 }
 
-/* Inputs & Selects */
-input,
-select {
+/* Form Styles */
+.select-wrapper { margin-bottom: 16px; }
+.select-wrapper label {
+  display: block;
+  font-size: 12px;
+  font-weight: 600;
+  color: #475569;
+  margin-bottom: 6px;
+  text-transform: uppercase;
+}
+
+.v-input, select {
   width: 100%;
-  padding: 12px 14px;
-  margin-bottom: 14px;
-  border-radius: 8px;
-  border: 1px solid #d1d5db;
-  font-size: 14px;
-  outline: none;
-  transition: border-color 0.2s, box-shadow 0.2s;
+  padding: 12px;
+  border: 1.5px solid #e2e8f0;
+  border-radius: 10px;
+  transition: all 0.2s;
 }
 
-/* Focus state */
-input:focus,
-select:focus {
+.v-input:focus, select:focus {
   border-color: #2563eb;
-  box-shadow: 0 0 0 2px rgba(37, 99, 235, 0.2);
+  outline: none;
+  background: #f8faff;
 }
 
-/* Disabled fields */
-input:disabled,
-select:disabled {
-  background-color: #f3f4f6;
+/* Result Box */
+.result-box {
+  background: #f0fdf4;
+  border: 1px solid #bbf7d0;
+  padding: 12px;
+  border-radius: 10px;
+  margin-top: 10px;
+  text-align: center;
+}
+
+.success-tag { color: #15803d; font-size: 12px; font-weight: bold; }
+
+/* Continue Button */
+.continue-btn {
+  width: 100%;
+  background: #2563eb;
+  color: white;
+  border: none;
+  padding: 14px;
+  border-radius: 12px;
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+  margin-top: 10px;
+  transition: opacity 0.3s;
+}
+
+.continue-btn:disabled {
+  background: #cbd5e1;
+  cursor: not-allowed;
+  opacity: 0.7;
+}
+
+/* Loader */
+.loader {
+  width: 18px;
+  height: 18px;
+  border: 2px solid #FFF;
+  border-bottom-color: transparent;
+  border-radius: 50%;
+  display: inline-block;
+  animation: rotation 1s linear infinite;
+}
+
+@keyframes rotation { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
+
+.grid-inputs {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 15px;
+}
+
+/* Action group to align Input and Fetch Button */
+.input-action-group {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 16px;
+  align-items: center;
+}
+
+.input-action-group .v-input {
+  flex: 2; /* Gives more space to the input */
+  margin-bottom: 0; /* Override previous margin */
+  text-transform: uppercase; /* Vehicle numbers are usually caps */
+  letter-spacing: 1px;
+}
+
+.fetch-btn {
+  flex: 1;
+  background-color: #2563eb;
+  color: #ffffff;
+  border: none;
+  padding: 12px;
+  border-radius: 10px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  height: 46px; /* Match height with input */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.fetch-btn:hover:not(:disabled) {
+  background-color: #1d4ed8;
+  box-shadow: 0 4px 12px rgba(37, 99, 235, 0.2);
+}
+
+.fetch-btn:disabled {
+  background-color: #e2e8f0;
+  color: #94a3b8;
   cursor: not-allowed;
 }
 
-/* Buttons */
-button {
-  width: 100%;
-  padding: 12px;
-  border-radius: 8px;
-  border: none;
-  font-size: 15px;
-  font-weight: 600;
-  cursor: pointer;
-  transition: background-color 0.2s, transform 0.1s;
+/* Ensure the success box looks distinct from the input */
+.result-box {
+  background: #f0fdf4;
+  border: 1px dashed #22c55e;
+  padding: 15px;
+  border-radius: 12px;
+  margin-bottom: 20px;
+  animation: fadeIn 0.4s ease-out;
 }
 
-/* Fetch button */
-button:first-of-type {
-  background-color: #2563eb;
-  color: #ffffff;
-  margin-bottom: 10px;
-}
-
-button:first-of-type:hover {
-  background-color: #1d4ed8;
-}
-
-/* Continue button */
-button:last-of-type {
-  background-color: #16a34a;
-  color: #ffffff;
-  margin-top: 16px;
-}
-
-button:last-of-type:hover {
-  background-color: #15803d;
-}
-
-/* Button press */
-button:active {
-  transform: scale(0.98);
-}
-
-/* Divider */
-hr {
-  margin: 18px 0;
-  border: none;
-  border-top: 1px solid #e5e7eb;
-}
-
-/* Responsive adjustments */
-@media (max-width: 480px) {
-  .vehicle-card {
-    padding: 18px;
-  }
-
-  h2 {
-    font-size: 20px;
-  }
-
-  input,
-  select {
-    font-size: 13px;
-    padding: 10px 12px;
-  }
-
-  button {
-    font-size: 14px;
-    padding: 11px;
-  }
-}
-
-
-.mode-toggle {
-  display: flex;
-  gap: 16px;
-  margin-bottom: 16px;
-}
-
-.mode-toggle label {
-  display: flex;
-  align-items: center;
-  gap: 6px;
-  font-size: 14px;
-  cursor: pointer;
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(-10px); }
+  to { opacity: 1; transform: translateY(0); }
 }
