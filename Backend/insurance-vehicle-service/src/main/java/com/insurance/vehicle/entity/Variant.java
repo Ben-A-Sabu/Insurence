@@ -2,6 +2,7 @@ package com.insurance.vehicle.entity;
 
 import com.insurance.vehicle.constants.FuelType;
 
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
 import jakarta.persistence.Enumerated;
@@ -20,6 +21,14 @@ public class Variant {
     private FuelType fuelType;
 
     private String name;
+    
+    @Column(name = "risk_multiplier")
+    private Double premiumMultiplier;
+
+	public Double getPremiumMultiplier() {
+		return premiumMultiplier;
+	}
+
 
 	public Long getId() {
 		return id;

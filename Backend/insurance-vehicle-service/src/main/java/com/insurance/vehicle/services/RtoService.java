@@ -5,7 +5,9 @@ import java.util.List;
 import org.springframework.stereotype.Service;
 
 import com.insurance.vehicle.dto.RtoResponseDto;
+import com.insurance.vehicle.dto.RtoRiskDto;
 import com.insurance.vehicle.dtoMappers.RtoMapper;
+import com.insurance.vehicle.dtoMappers.RtoRiskMapper;
 import com.insurance.vehicle.entity.RTO;
 import com.insurance.vehicle.exception.InvalidRequestException;
 import com.insurance.vehicle.exception.ResourceNotFoundException;
@@ -45,6 +47,20 @@ public class RtoService {
 
         return result;
     }
+    
+    
+    public RtoRiskDto getRtoRiskById(Long rtoId) {
+
+        return rtoRepository.findById(rtoId)
+                .map(RtoRiskMapper::toRiskDto)
+                .orElseThrow(() ->
+                        new ResourceNotFoundException(
+                                "Active RTO risk not found for id: " + rtoId
+                        )
+                );
+    }
+
+
 
     public RTO getRtoById(Long id) {
         return rtoRepository.findById(id)
