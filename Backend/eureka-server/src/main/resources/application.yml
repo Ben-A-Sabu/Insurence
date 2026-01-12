@@ -1,0 +1,13 @@
+spring:
+  application:
+    name: eureka-server
+  main:
+    allow-bean-definition-overriding: true  # optional, sometimes useful
+
+server:
+  port: 8761  # Eureka default port
+
+eureka:
+  client:
+    register-with-eureka: false   # Eureka Server does NOT register itself
+    fetch-registry: false         # Server does not fetch registry
