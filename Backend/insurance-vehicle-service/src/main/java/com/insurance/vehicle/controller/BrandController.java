@@ -1,6 +1,8 @@
 package com.insurance.vehicle.controller;
 
 
+import java.util.List;
+
 import org.springframework.web.bind.annotation.*;
 
 import com.insurance.vehicle.dto.BrandResponseDto;
@@ -14,6 +16,13 @@ public class BrandController {
 
     public BrandController(BrandService brandService) {
         this.brandService = brandService;
+    }
+    
+    @GetMapping
+    public List<BrandResponseDto> getAllBrands()
+    {
+    	return brandService.getAllBrnads();
+    	
     }
 
     @GetMapping("/{id}")

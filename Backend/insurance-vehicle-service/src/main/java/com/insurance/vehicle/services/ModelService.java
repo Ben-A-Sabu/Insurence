@@ -7,7 +7,9 @@ import java.util.List;
 import org.springframework.stereotype.Service;
 
 import com.insurance.vehicle.dto.ModelResponseDto;
+import com.insurance.vehicle.dto.ModelRiskDto;
 import com.insurance.vehicle.dtoMappers.ModelMapper;
+import com.insurance.vehicle.dtoMappers.ModelRiskMapper;
 import com.insurance.vehicle.exception.InvalidRequestException;
 import com.insurance.vehicle.exception.ResourceNotFoundException;
 
@@ -37,6 +39,24 @@ public class ModelService {
 
         return models;
     }
+    
+    
+    public ModelRiskDto getModelRiskById(Long modelId) {
+
+        if (modelId == null) {
+            throw new InvalidRequestException("Model id is required");
+        }
+
+        return modelRepository.findById(modelId)
+                .map(ModelRiskMapper::toRiskDto)
+                .orElseThrow(() ->
+                        new ResourceNotFoundException(
+                                "Model risk not found for id: " + modelId
+                        )
+                );
+    }
+
+    
 
     public ModelResponseDto getModelById(Long modelId) {
         return modelRepository.findById(modelId)

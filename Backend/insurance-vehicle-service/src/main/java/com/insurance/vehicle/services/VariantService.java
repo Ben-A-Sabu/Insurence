@@ -6,7 +6,10 @@ import org.springframework.stereotype.Service;
 
 import com.insurance.vehicle.constants.FuelType;
 import com.insurance.vehicle.dto.VariantResponseDto;
+import com.insurance.vehicle.dto.VariantRiskDto;
 import com.insurance.vehicle.dtoMappers.VariantDtoMapper;
+import com.insurance.vehicle.dtoMappers.VariantRiskMapper;
+import com.insurance.vehicle.entity.Variant;
 import com.insurance.vehicle.exception.InvalidRequestException;
 import com.insurance.vehicle.exception.ResourceNotFoundException;
 import com.insurance.vehicle.repository.VariantRepository;
@@ -41,6 +44,36 @@ public class VariantService {
         return variants;
     }
 
+    
+    public VariantRiskDto getVariantRiskByIdAndFuelType(
+            Long variantId,
+            FuelType fuelType) {
+
+        if (variantId == null || fuelType == null) {
+            throw new InvalidRequestException(
+                    "Variant id and FuelType are required"
+            );
+        }
+
+        Variant variant = variantRepository.findById(variantId)
+                .orElseThrow(() ->
+                        new ResourceNotFoundException(
+                                "Variant risk not found for id: " + variantId
+                        )
+                );
+
+        if (!fuelType.equals(variant.getFuelType())) {
+            throw new ResourceNotFoundException(
+                    "Variant risk not found for id: "
+                            + variantId + " and fuelType: " + fuelType
+            );
+        }
+
+        return VariantRiskMapper.toRiskDto(variant);
+    }
+
+
+    
     public List<FuelType> getFuelTypesByModel(Long modelId) {
 
         List<FuelType> fuels = variantRepository.findFuelTypesByModelId(modelId);

@@ -31,6 +31,8 @@ public class RTO {
     @Column(name = "is_active")
     private Boolean isActive = true;
     
+    @Column(name = "risk_multiplier")
+    private Double premiumMultiplier;
     
 
 	public Long getId() {
@@ -68,11 +70,11 @@ public class RTO {
 	}
 
 
-    
-    
-    
-    
-    
+
+	public Double getPremiumMultiplier() {
+		return premiumMultiplier;
+	}
+   
 	
 
 }
